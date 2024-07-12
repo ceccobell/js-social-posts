@@ -83,7 +83,7 @@ posts.forEach(element => {
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${element.likes}</b> persone
+                        Piace a <b id="like-counter-${element.id}" class="js-likes-counter">${element.likes}</b> persone
                     </div>
                 </div>
             </div>
@@ -91,14 +91,27 @@ posts.forEach(element => {
 })
 
 
-let like_btn = document.querySelectorAll(".like-button[data-postid]")
+const like_btn = document.querySelectorAll(".like-button[data-postid]");
 
-like_btn.forEach(element => {
-    element.addEventListener("click", function () {
-        if (element.style.color == 'blue') {
-            element.style.color = '#404040'
+like_btn.forEach(button => {
+    button.addEventListener("click", function () {
+
+        const postId = button.getAttribute('data-postid');
+
+        const likeCounter = document.getElementById(`like-counter-${postId}`);
+
+        let counter = parseInt(likeCounter.textContent);
+
+        if (button.style.color === 'blue') {
+            button.style.color = '#404040';
+            counter--;
         } else {
-            element.style.color = 'blue'
+            button.style.color = 'blue';
+            counter++;
         }
-    })
-})
+
+        likeCounter.textContent = counter;
+    });
+});
+
+
