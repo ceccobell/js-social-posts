@@ -66,7 +66,7 @@ posts.forEach(element => {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${element.author.name}</div>
-                        <div class="post-meta__time">4 mesi fa</div>
+                        <div class="post-meta__time">${element.created}</div>
                     </div>
                 </div>
             </div>
@@ -94,8 +94,8 @@ posts.forEach(element => {
 const like_btn = document.querySelectorAll(".like-button[data-postid]");
 
 like_btn.forEach(button => {
-    button.addEventListener("click", function () {
-
+    button.addEventListener("click", function (event) {
+        event.preventDefault()
         const postId = button.getAttribute('data-postid');
 
         const likeCounter = document.getElementById(`like-counter-${postId}`);
